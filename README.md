@@ -2,7 +2,9 @@
 
 ## seata
 
-下载地址：http://seata.io/en-us/blog/download.html，选择binary，笔者的版本是1.4.0。
+下载地址：http://seata.io/en-us/blog/download.html
+
+选择binary，笔者的版本是1.4.0。
 
 后面seata客户端的版本要与seata-server匹配。
 
@@ -10,7 +12,7 @@ seata中有两个重要配置文件file.conf与registry.conf，在服务端（se
 
 ## nacos
 
-官网https://nacos.io/zh-cn/docs/quick-start.html
+官网：https://nacos.io/zh-cn/docs/quick-start.html
 
 windows选择zip，版本选择近期的，笔者的是1.3.2
 
