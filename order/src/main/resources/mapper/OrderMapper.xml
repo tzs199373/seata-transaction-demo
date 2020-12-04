@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.order.dao.OrderDao">
+
+    <resultMap id="BaseResultMap" type="com.example.common.entities.Order" >
+        <id property="id" jdbcType="BIGINT" column="id" />
+        <result property="userId" jdbcType="BIGINT" column="user_id" />
+        <result property="productId" jdbcType="BIGINT" column="product_id" />
+        <result property="count" jdbcType="INTEGER" column="count" />
+        <result property="money" jdbcType="DECIMAL" column="money" />
+        <result property="status" jdbcType="INTEGER" column="status" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.example.common.entities.Order" useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO `order` (id, user_id, product_id, count, money, status )
+        values(null, #{userId}, #{productId}, #{count}, #{money}, 0)
+    </insert>
+
+    <update id="update">
+        UPDATE `order`  set status = 1
+        WHERE id = #{id} and status = #{status} and user_id = #{userId}
+    </update>
+</mapper>

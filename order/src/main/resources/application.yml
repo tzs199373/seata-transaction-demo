@@ -1,0 +1,71 @@
+# 端口
+server:
+  port: 9011
+
+spring:
+  application:
+    name: seata-order-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        cluster-name: default
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/seata_order?allowPublicKeyRetrieval=true&useSSL=true&serverTimezone=UTC
+    username: root
+    password: accp
+    hikari:
+      connection-test-query: SELECT 1 FROM DUAL
+      minimum-idle: 1
+      maximum-pool-size: 10
+      pool-name: ${spring.application.name}-CP
+      idle-timeout: 10000
+      cachePrepStmts: true
+      prepStmtCacheSize: 250
+      prepStmtCacheSqlLimit: 2048
+      leakDetectionThreshold: 40000
+
+
+seata:
+  enabled: true
+  application-id: ${spring.application.name}
+  tx-service-group: ${spring.application.name}-group
+  enable-auto-data-source-proxy: true
+  config:
+    type: nacos
+    nacos:
+      namespace:
+      serverAddr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      userName: "nacos"
+      password: "nacos"
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 127.0.0.1:8848
+      namespace:
+      userName: "nacos"
+      password: "nacos"
+
+ribbon:
+  ReadTimeout: 600000
+  ConnectTimeout: 600000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+
+# 饿加载开启 Feign 预加载, 防止第一次请求超时
+  eager-load:
+    enabled: true
+    clients: seata-storage-service, seata-account-service
+
+mybatis:
+  mapperLocations: classpath:mapper/*Mapper.xml
+  # 所有entity别名类所在的包
+  type-aliases-pachage: com.example.common.entities
+
+logging:
+  level:
+    #    root: debug
+    com.example.order: debug
