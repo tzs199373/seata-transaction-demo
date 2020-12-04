@@ -38,10 +38,14 @@ registry {
 
 # seata-server的配置中心
 config {
-  type = "file"
-  
-  file {
-    name = "file.conf"
+  type = "nacos"
+
+  nacos {
+    serverAddr = "127.0.0.1:8848"
+    namespace = ""
+    group = "SEATA_GROUP"
+    username = ""
+    password = ""
   }
 }
 
