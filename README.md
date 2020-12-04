@@ -234,10 +234,12 @@ fi
 
 配置中比较重要的就是事务分组和store，store后续讲到。
 
-事务分组配置指的是呼应TC集群（seata-server），这里都默认default
+事务分组配置指的是TC集群（seata-server），这里都默认default
 
 service.vgroupMapping.seata-storage-service-group=default
+
 service.vgroupMapping.seata-order-service-group=default
+
 service.vgroupMapping.seata-account-service-group=default
 
 各微服务通过以下配置，来读取这个“default”
